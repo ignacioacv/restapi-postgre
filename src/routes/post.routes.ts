@@ -17,6 +17,6 @@ router.get("/posts/:id", getPostById);
 router.put("/posts/:id", editPostById);
 router.delete("/posts/:id", deletePostById);
 
-router.get("/:id/comments", getPostComments);
+router.get("/posts/:id/comments", getPostComments);
 
 export default router;
