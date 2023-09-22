@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import { Post } from "../models/postModel";
-import errorMiddleware from "@src/middlewares/errorHandlerMiddleware";
 
 // Obtener todos los Posts
 export const getAllPosts = async (_req: Request, res: Response) => {
@@ -9,7 +8,7 @@ export const getAllPosts = async (_req: Request, res: Response) => {
     const posts = await Post.findAll();
     res.json(posts);
   } catch (error) {
-    next(error);
+    res.status(500).json({ error: "No se pudo crear el Post" });
   }
 };
 
