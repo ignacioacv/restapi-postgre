@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import { Post } from "../models/postModel";
+import { Comments } from "../models/commentsModel";
 
 // Obtener todos los Posts
 export const getAllPosts = async (_req: Request, res: Response) => {
@@ -73,9 +74,11 @@ export const deletePostById = async (req: Request, res: Response) => {
 export const getPostComments = async (req: Request, res: Response) => {
   const postId = parseInt(req.params.id, 10);
   try {
-    const posts = await Post.findByPk(postId);
-    res.json(posts);
+    const pComments = await Comments.findAll({
+      where: { postId: postId },
+    });
+    res.json(pComments);
   } catch (error) {
-    res.status(500).json({ error: "No se pudo crear el Post" });
+    res.status(500).json({ error: "Ocurrio un error" });
   }
 };
